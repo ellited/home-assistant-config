@@ -1,0 +1,527 @@
+############################################################
+#
+# Управление светом в туалете
+#
+############################################################
+- alias: Control lights in restroom
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.restroom_virtual_switch
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.restroom_switch
+
+############################################################
+#
+# Управление светом в спальне
+#
+############################################################
+- alias: Control lights in bedroom
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.bedroom_virtual_switch
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.bedroom_switch
+
+############################################################
+#
+#  Управление светом в детской
+#
+############################################################
+- alias: Control lights in kinderoom
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.childrensroom_virtual_switch
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.childrensroom_switch
+
+############################################################
+#
+#  Управление светом в кухне
+#
+############################################################
+- alias: Control lights in kitchen
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.kitchen_virtual_switch
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.kitchen_switch
+
+############################################################
+#
+#  Включение света по датчику движения в коридоре
+#
+############################################################
+- alias: Turn on hall light when there is movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hall_motion_sensor
+    to: 'on'
+  action:
+    service: switch.turn_on
+    entity_id: switch.hall_switch
+
+
+############################################################
+#
+#  Выключение света через 3 минуты неактивности в коридоре
+#
+#########################################################
+- alias: Turn off holl light 3 minutes after last movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hall_motion_sensor
+    to: 'off'
+    for:
+      minutes: 3
+  action:
+    service: switch.turn_off
+    entity_id: switch.hall_switch
+
+############################################################
+#
+#  Выключить свет в туалете через 7 минут
+#
+############################################################
+- alias: Turn off lights in restroom after 7 minutes
+  trigger:
+   - platform: state
+     entity_id:
+       - switch.restroom_switch
+     from: 'off'
+     to: 'on'
+  action:
+    - delay: '00:07:00'
+    - service: switch.turn_off
+      entity_id:
+        - switch.restroom_switch
+
+############################################################
+#
+#  Выключить свет в квартире
+#
+############################################################
+- alias: Turn off lights in apartment
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.apartment_virtual_switch
+      click_type: single
+  action:
+    - service: switch.turn_off
+      entity_id: group.all_switches
+
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        message: "Goodbuy, Mike! See you soon!"
+        data:
+          type: tts
+
+############################################################
+#
+#  Выключить свет в зале через 40 минут
+#
+############################################################
+- alias: Turn off lights in guestroom after 40 minutes
+  trigger:
+   - platform: state
+     entity_id:
+       - input_boolean.sleep_mode
+     from: 'off'
+     to: 'on'
+  action:
+    - delay: '00:40:00'
+    - service: switch.turn_off
+      entity_id: switch.guestroom_left_switch
+    - service: switch.turn_off
+      entity_id: switch.guestroom_right_switch
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.sleep_mode
+
+############################################################
+#
+#  Включить/Выключить стиральную машинку
+#
+############################################################
+- alias: Control wash machine
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.washmachine_virtual_switch
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.washmachine_plug
+
+############################################################
+#
+#  Включение света в столовой на полную мощность
+#
+############################################################
+- alias: Turn on all dinner room lights
+  trigger:
+   - platform: state
+     entity_id:
+       - switch.diningroom_switch
+     to: 'on'
+  action:
+    - delay: '00:00:01'
+    - service: switch.turn_on
+      entity_id:
+        - switch.lamps_kitchen
+
+############################################################
+#
+#  Включение колонок
+#
+############################################################
+- alias: Turn speakers on
+  trigger:
+   - platform: state
+     entity_id:
+       - media_player.kitchen_lg_tv
+     to: 'playing'
+  action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.logitech
+
+############################################################
+#
+#  Выключение колонок
+#
+############################################################
+- alias: Turn speakers off
+  trigger:
+   - platform: state
+     entity_id:
+       - media_player.kitchen_lg_tv
+     to: 'off'
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.logitech
+
+############################################################
+#
+#  Выключение света в столовой (в начальное состояние)
+#
+############################################################
+- alias: Turn off all dinner room lights
+  trigger:
+   - platform: state
+     entity_id:
+       - switch.diningroom_switch
+     to: 'off'
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.lamps_kitchen
+
+############################################################
+#
+#  Отправить сообщение в телеграмм при открытии двери
+#
+############################################################
+- alias: Notify door open state
+  trigger:
+   - platform: state
+     entity_id:
+       - binary_sensor.hall_door_sensor
+     from: 'off'
+     to: 'on'
+  action:
+    - service: notify.telegram
+      data:
+        message: 'Входная дверь была окрыта!'
+
+
+############################################################
+#
+#  Отправить сообщение в телеграмм при нажатии кнопки звонка
+#
+############################################################
+- alias: Notify doorbell button click
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.doorbell_virtual_switch
+      click_type: single
+  action:
+    - service: notify.telegram
+      data:
+        message: 'Кто-то позвонил в звонок'
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        message: "Knock-Knock. It's unexpexted guests! Don't open the door!"
+        data:
+          type: tts
+
+
+############################################################
+#
+#  Уведомление о включении Home Assistant
+#
+############################################################
+- alias: Home Assistant Notification
+  initial_state: 'on'
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: notify.telegram
+      data:
+        message: "{{ '\U0001F384' }} Cервер запущен в {{ states('sensor.time') }}."
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        message: "Home Assistant succesfully run"
+        data:
+          type: tts
+
+############################################################
+#
+#  Уведомление об остановке Home Assistant
+#
+############################################################
+- alias: Home Assistant Stop Notification
+  initial_state: 'on'
+  trigger:
+    - platform: event
+      event_type: homeassistant_stop
+  action:
+    - service: notify.telegram
+      data:
+        message: "Home Assistant остановлен в {{ states('sensor.time') }}"
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        message: "Home Assistant stopped"
+        data:
+          type: tts
+
+############################################################
+#
+#  Уведомление об очистке туалета котов
+#
+############################################################
+- alias: Cat clean
+  initial_state: 'on'
+  trigger:
+    - platform: time
+      at: '08:30:00'
+    - platform: time
+      at: '20:00:00'
+  condition:
+    condition: template
+    value_template: >
+      {{ states('input_datetime.cats_cleaning_date') <= states('sensor.date') }}
+  action:
+    - service: notify.telegram
+      data:
+        message: "Почисть туалет у котов! {{ '\U0001F4A9' }}"
+        data:
+          inline_keyboard:
+            - [["Уже почищено", "/cat_cleaned"], ["Отложить на завтра", "/cat_clean_tomorrow"]]
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        message: "Hey! Wake up! It's time to clean cats toilet"
+        data:
+          type: tts
+
+############################################################
+#
+#  Уведомление об очистке туалета котов
+#
+############################################################
+- alias: Cats restroom cleaned
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/cat_cleaned'
+  action:
+    - service: notify.telegram
+      data:
+        message: "Следующий раз необходимо почистить туалет через 3 дня ({{ (as_timestamp(now()) + (3*24*3600)) |timestamp_custom('%d.%m.%Y') }})"
+
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        message: "Oh! Finally! It's cleaned!"
+        data:
+          type: tts
+
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.cats_cleaning_date
+      data_template:
+        date: "{{ (as_timestamp(now()) + (3 * 24*3600)) |timestamp_custom('%Y-%m-%d') }}"
+
+
+############################################################
+#
+#  Уведомление об отложенной уборке туалета котов до завтра
+#
+############################################################
+- alias: Cats restroom will be cleaned tomorrow
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/cat_clean_tomorrow'
+  action:
+    - service: notify.telegram
+      data:
+        message: "Напоминание об уборке отложено до завтра ({{ (as_timestamp(now()) + (24*3600)) |timestamp_custom('%d.%m.%Y') }})"
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.cats_cleaning_date
+      data_template:
+        date: "{{ (as_timestamp(now()) + (24*3600)) |timestamp_custom('%Y-%m-%d') }}"
+      
+      
+- alias: system_weather_to_telegram
+  initial_state: 'on'
+  trigger:
+    - platform: time
+      at: '07:00:00'
+    - platform: time
+      at: '21:00:00'
+  action:
+    - service: notify.telegram
+      data:
+        message: |
+            {%- set date = as_timestamp(now()) -%}
+            {% set weekday_list = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'] %}
+            {% set month_list = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'] %}
+            {% set m_ok = date | timestamp_custom("%m") | int %}
+            {% set wd_ok = date | timestamp_custom("%w") | int %}
+            {% set weekday = weekday_list[wd_ok-1] %} 
+            {% set month = month_list[m_ok-1] %} 
+            {% set hour_num = now().hour | int %}
+            {% if hour_num >=6 and hour_num <12 %} {{ "\U00002600" }}Доброе утро!
+            {% elif hour_num>=12 and hour_num<17 %} {{ "\U0001f31e" }}Добрый день!
+            {% elif hour_num>=17 and hour_num<22 %} {{ "\U0001f31d" }}Добрый вечер!
+            {% else %} {{ "\U0001f31a" }}Доброй ночи!
+            {% endif %}
+            {%if hour_num < 17 and hour_num >= 0 %}
+            Сегодня {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}.
+            {{ states('sensor.dark_sky_summary_0d') }}
+            Максимальная температура {{states('sensor.dark_sky_daytime_high_temperature_0d')|round(0)}} °C.
+            Минимальная температура {{states('sensor.dark_sky_overnight_low_temperature_0d')|round(0)}} °C.
+            Вероятность осадков {{states('sensor.dark_sky_precip_probability_0d')|round(0)}}%. 
+            {%if states('sensor.dark_sky_precip_probability_0d')|int > 0 %} Вид осадков - {% if states('sensor.dark_sky_precip_0d') == "snow" %}снег{% elif states('sensor.dark_sky_precip_0d') == "rain" %}дождь{% elif states('sensor.dark_sky_precip_0d') == "sleet" %}снег с дождем{% else %}неизвестно{% endif %}.
+            {% endif %}
+            {% endif %}
+            {%if hour_num >= 17 and hour_num <= 23 %}
+            Прогноз погоды на завтра - {{ states('sensor.dark_sky_summary_1d') }}
+            Максимальная температура {{states('sensor.dark_sky_daytime_high_temperature_1d')|round(0)}} °C.
+            Минимальная температура {{states('sensor.dark_sky_overnight_low_temperature_1d')|round(0)}} °C.
+            Вероятность осадков {{states('sensor.dark_sky_precip_probability_1d')|round(0)}}%.
+            {%if states('sensor.dark_sky_precip_probability_1d')|int > 0 %}Вид осадков - {% if states('sensor.dark_sky_precip_1d') == "snow" %}снег{% elif states('sensor.dark_sky_precip_1d') == "rain" %}дождь{% elif states('sensor.dark_sky_precip_1d') == "sleet" %}снег с дождем{% else %}неизвестно{% endif %}.
+            {% endif %}
+            {% endif %}
+  
+############################################################
+#
+#  Отправить сообщение в телеграмм при нажатии тестовой кнопки
+#
+############################################################
+- alias: Notify test button click
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.test_virtual_switch
+      click_type: single
+  action:
+    - service: notify.alexa_media_rudenko_s_echo_dot
+      data:
+        data:
+          type: tts
+        message: "This is a weekly test of the announcing system."
+
+############################################################ 
+- alias: Clean camera Snapshots
+  trigger:
+  - minutes: /30
+    platform: time_pattern
+  condition: []
+  action:
+    - service: shell_command.clean_camera_snapshots
+    
+############################################################
+#
+#  Отправить сообщение в телеграмм со снимком с камеры
+#
+############################################################
+- id: 'Camera message'
+  alias: "Send camera photo"
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/camera'
+  action:
+    - service: notify.telegram
+      data:
+        title: Send an images
+        message: "That's an example that sends an image."
+        data:
+          photo:
+            - file: /share/motion/lastsnap.jpg
+              caption: Фото с камеры
+
+# cats_cleaning_date
+
+####################
+### IK Ping Pong ###
+####################
+# - id: telegram-ik-ping-pong
+#   alias: 'telegram ping pong'
+#   hide_entity: true
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: '/cat_cleaned'
+#   action:
+#     - service: telegram_bot.answer_callback_query
+#       data_template:
+#         callback_query_id: '{{ trigger.event.data.id }}'
+#         message: >-
+#           Callback received from {{ trigger.event.data.from_first }}.
+#           Message id: {{ trigger.event.data.message.message_id }}.
+#           Data: {{ trigger.event.data.data }}
+#           {{now().strftime("%H:%M:%S %Y-%m-%d")}} Pong, Message from {{ trigger.event.data["user_id"] }}.
+#         show_alert: true
+
+# - id: 'testmessage'
+#   alias: "Telegram Test"
+#   hide_entity: true
+#   trigger:
+#     platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/ping'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         message: 'pong'

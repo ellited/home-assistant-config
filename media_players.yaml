@@ -1,0 +1,15 @@
+- platform: plex
+  scan_interval: 1
+  show_all_controls: true
+  use_episode_art: true
+  entity_namespace: 'plex'
+
+- platform: webostv
+  host: !secret kitchen_tv_host
+  name: Kitchen LG TV
+  filename: webostv.conf
+  timeout: 5
+  customize:
+    sources:
+      - plex
+      - youtube

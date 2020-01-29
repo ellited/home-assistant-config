@@ -1,0 +1,7 @@
+# Telegram 
+- name: telegram
+  platform: telegram
+  chat_id: !secret telegram_chat_id
+
+- platform: alexa_media
+  name: alexa_media

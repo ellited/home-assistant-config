@@ -1,0 +1,13 @@
+  - platform: broadlink
+    host: '192.168.1.128'
+    mac: '78:0F:77:FD:80:37'
+    type: rm
+    switches:
+      lamps_kitchen:
+        friendly_name: "Свет на кухне"
+        command_on: 'siM0AAocGwobCgocCRwbCgkcHAoKHAkcChsbCgkcChwcCQobGwoJHBwJChwJHAkAARccChsKHAoAAAAA'
+        command_off: 'sjI0ABwJHAocCQobHAkcCQobChscCQobHAkKGwobChscCQobChscCQobHAkcCQocChwKGwoAARcAAAAA'
+      logitech:
+        friendly_name: "Logitech Z906"
+        command_on: 'JgBIAAABKJIUERQ1FBEUERQRFBEUERMRFBEUERQRFBEUERM2FBEUNRQRFBEUERQRExEUERQRFDUUNhQ1FDUUNhQ1FDYTNhQREwANBQ=='
+        command_off: 'JgBIAAABKJIUERQ1FBEUERQRFBEUERMRFBEUERQRFBEUERM2FBEUNRQRFBEUERQRExEUERQRFDUUNhQ1FDUUNhQ1FDYTNhQREwANBQ=='

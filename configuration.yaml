@@ -1,0 +1,46 @@
+homeassistant: !include homeassistant.yaml
+default_config:
+
+automation: !include automations.yaml
+sensor: !include sensors.yaml
+switch: !include switches.yaml
+xiaomi_aqara: !include xiaomi_aqara.yaml
+telegram_bot: !include telegram_bot.yaml
+notify: !include notify.yaml
+input_boolean: !include input_boolean.yaml
+zone: !include zones.yaml
+media_player: !include media_players.yaml
+http: !include http.yaml
+      
+homekit:
+
+recorder:
+  purge_keep_days: 3
+  
+      
+input_datetime:
+  cats_cleaning_date:
+    name: Дата очистки туалета котов
+    has_date: true
+    has_time: false
+
+weather:
+  - platform: darksky
+    api_key: 3a5f4014b1ab0f47762663b850776e30
+    mode: daily
+    
+alexa_media:
+  accounts:
+    - email: !secret amazon_user
+      password: !secret amazon_password
+      url: amazon.com
+      
+# camera:
+#   - platform: local_file
+    # name: Living Room Cam
+    # file_path: /share/motion/lastsnap.jpg
+
+# stream:
+
+# shell_command:
+#   clean_camera_snapshots: 'rm -rf /share/motion'

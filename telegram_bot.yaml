@@ -1,0 +1,13 @@
+  - platform: polling
+    api_key: !secret telegram_api_key
+    proxy_url: !secret telegram_proxy_url
+    proxy_params:
+      username: !secret telegram_username
+      password: !secret telegram_password
+    allowed_chat_ids:
+      - !secret telegram_chat_id_mike
+      - !secret telegram_chat_id_lizzi
+      - !secret telegram_chat_id_alexey
+      - !secret telegram_chat_id_nadya
+      - !secret telegram_chat_id_nikita
+      - !secret telegram_chat_id

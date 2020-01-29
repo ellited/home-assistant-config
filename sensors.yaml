@@ -1,0 +1,37 @@
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+      - type: memory_use
+      - type: memory_use_percent
+  - platform: time_date
+    display_options:
+        - "time"  #Это время
+        - "date"  # Это ставим если нужен отдельно сенсор даты
+        - "date_time"
+        
+  - platform: plex_recently_added
+    token: 'ezVSqcaGsCDwiysZqdqV'
+    host: 192.168.1.228
+    port: 32400
+        
+
+  - platform: darksky
+    api_key: 3a5f4014b1ab0f47762663b850776e30
+    language: ru
+    units: si
+    scan_interval: '02:00:00'
+    forecast:
+      - 0
+      - 1
+    monitored_conditions:
+      - summary
+      #- icon
+      - temperature
+      #- wind_speed
+      #- humidity
+      #- visibility
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - precip_probability
+      - precip_type

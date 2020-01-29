@@ -1,0 +1,4 @@
+  sleep_mode:
+    name: Выключить ночью свет
+    initial: off
+    icon: mdi:weather-night

@@ -1,0 +1,5 @@
+- name: Mike's work
+  latitude: !secret mikes_work_latitude
+  longitude: !secret mikes_work_longitude
+  radius: 200
+  icon: mdi:mdi-laptop-mac
