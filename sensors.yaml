@@ -16,7 +16,7 @@
         
 
   - platform: darksky
-    api_key: 3a5f4014b1ab0f47762663b850776e30
+    api_key: !secret darksky_api_key
     language: ru
     units: si
     scan_interval: '02:00:00'

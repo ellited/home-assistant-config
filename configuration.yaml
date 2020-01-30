@@ -26,7 +26,7 @@ input_datetime:
 
 weather:
   - platform: darksky
-    api_key: 3a5f4014b1ab0f47762663b850776e30
+    api_key: !secret darksky_api_key
     mode: daily
     
 alexa_media:
