@@ -34,13 +34,3 @@ alexa_media:
     - email: !secret amazon_user
       password: !secret amazon_password
       url: amazon.com
-      
-# camera:
-#   - platform: local_file
-    # name: Living Room Cam
-    # file_path: /share/motion/lastsnap.jpg
-
-# stream:
-
-# shell_command:
-#   clean_camera_snapshots: 'rm -rf /share/motion'
