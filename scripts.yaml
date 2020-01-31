@@ -1,7 +1,0 @@
-logitech_z906_select_source:
-    sequence:
-      - service: broadlink.send
-        data:
-          host: !secret broadlink_kitchen_host
-          packet:
-            - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
