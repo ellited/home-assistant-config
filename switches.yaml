@@ -1,6 +1,6 @@
   - platform: broadlink
-    host: '192.168.1.128'
-    mac: '78:0F:77:FD:80:37'
+    host: !secret broadlink_kitchen_host
+    mac: !secret broadlink_kitchen_mac
     type: rm
     switches:
       lamps_kitchen:
@@ -13,6 +13,6 @@
         command_off: 'JgBIAAABKJIUERQ1FBEUERQRFBEUERMRFBEUERQRFBEUERM2FBEUNRQRFBEUERQRExEUERQRFDUUNhQ1FDUUNhQ1FDYTNhQREwANBQ=='
 
   - platform: broadlink
-    host: '192.168.1.174'
-    mac: '24:DF:A7:4F:89:E8'
+    host: !secret broadlink_living_room_host
+    mac: !secret broadlink_living_room_mac
     type: rm
