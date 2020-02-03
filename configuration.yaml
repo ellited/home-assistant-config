@@ -12,7 +12,7 @@ input_boolean: !include input_boolean.yaml
 zone: !include zones.yaml
 media_player: !include media_players.yaml
 http: !include http.yaml
-      
+webostv: !include webostv.yaml
 homekit:
 
 recorder:
