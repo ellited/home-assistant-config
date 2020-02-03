@@ -124,14 +124,28 @@
       entity_id: binary_sensor.apartment_virtual_switch
       click_type: single
   action:
-    - service: switch.turn_off
-      entity_id: group.all_switches
+    - service: script.lights_turn_off
 
     - service: notify.alexa_media_rudenko_s_echo_dot
       data:
         message: "Goodbuy, Mike! See you soon!"
         data:
           type: tts
+
+############################################################
+#
+#  Turn off lights in flat by bedroom switch
+#
+############################################################
+- alias: Turn off lights in flat by bedroom switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.bedroom_virtual_switch
+      click_type: double
+  action:
+    - service: script.lights_turn_off
 
 ############################################################
 #

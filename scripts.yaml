@@ -40,6 +40,9 @@ logitech_z906_select_bluetooth_source:
             - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
             - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
 
+############################################################
+# Turn off all lights in flat
+############################################################
 lights_turn_off:
   alias: Turn off all lights in flat
   sequence:
@@ -50,7 +53,22 @@ lights_turn_off:
       entity_id: switch.restroom_switch
 
     - service: switch.turn_off
+      entity_id: switch.bathroom_switch
+
+    - service: switch.turn_off
       entity_id: switch.guestroom_left_switch
 
     - service: switch.turn_off
       entity_id: switch.guestroom_right_switch
+
+    - service: switch.turn_off
+      entity_id: switch.diningroom_switch
+
+    - service: switch.turn_off
+      entity_id: switch.kitchen_switch
+
+    - service: switch.turn_off
+      entity_id: switch.bedroom_switch
+
+    - service: switch.turn_off
+      entity_id: switch.childrensroom_switch
