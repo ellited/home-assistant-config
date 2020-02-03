@@ -2,6 +2,7 @@
 # Send IR command for selecting next input source
 ############################################################
 logitech_z906_select_source:
+    alias: Send IR command for selecting next input source
     sequence:
       - service: broadlink.send
         data:
@@ -14,6 +15,7 @@ logitech_z906_select_source:
 # From Bluetooth to Digital Audio
 ############################################################
 logitech_z906_select_digital_audio_source:
+    alias: Send IR command for selecting next input source 2 times
     sequence:
       - service: broadlink.send
         data:
@@ -23,10 +25,11 @@ logitech_z906_select_digital_audio_source:
             - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
 
 ############################################################
-# Send IR command for selecting next input source 2 times.
+# Send IR command for selecting next input source 4 times.
 # From Digital Audio to Bluetooth
 ############################################################
 logitech_z906_select_bluetooth_source:
+    alias: Send IR command for selecting next input source 4 times
     sequence:
       - service: broadlink.send
         data:
@@ -36,3 +39,18 @@ logitech_z906_select_bluetooth_source:
             - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
             - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
             - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
+
+lights_turn_off:
+  alias: Turn off all lights in flat
+  sequence:
+    - service: switch.turn_off
+      entity_id: switch.hall_switch
+
+    - service: switch.turn_off
+      entity_id: switch.restroom_switch
+
+    - service: switch.turn_off
+      entity_id: switch.guestroom_left_switch
+
+    - service: switch.turn_off
+      entity_id: switch.guestroom_right_switch
