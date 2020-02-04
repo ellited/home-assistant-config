@@ -258,14 +258,27 @@
     event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.magic_cube
-      action_type: tap_twice
+      action_type: swing
   action:
     - service: script.logitech_z906_turn_on_off
 
 ############################################################
+# Change input source Logitech Z906
+############################################################
+- alias: Change input source Logitech Z906
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.magic_cube
+      action_type: shake_air
+  action:
+    - service: script.logitech_z906_select_source
+
+############################################################
 # Change volume Logitech Z906
 ############################################################
-- alias: Change volume Logitech Z906
+- alias: Change volume Logitech Z906 by rotating cube
   trigger:
     platform: event
     event_type: xiaomi_aqara.cube_action
