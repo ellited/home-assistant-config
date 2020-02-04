@@ -250,6 +250,37 @@
         - switch.lamps_kitchen
 
 ############################################################
+# Turn on/off Logitech Z906
+############################################################
+- alias: Turn on/off Logitech Z906
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.magic_cube
+      action_type: tap_twice
+  action:
+    - service: script.logitech_z906_turn_on_off
+
+############################################################
+# Change volume Logitech Z906
+############################################################
+- alias: Change volume Logitech Z906
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.magic_cube
+      action_type: rotate
+  action:
+  - service_template: >
+        {% if trigger.event.data.action_value | float > 0 %}
+          script.logitech_z906_volume_up
+        {% else %}
+          script.logitech_z906_volume_down
+        {% endif %}
+
+############################################################
 #
 #  Отправить сообщение в телеграмм при открытии двери
 #

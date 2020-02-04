@@ -1,14 +1,86 @@
 ############################################################
+# Send IR command for turning on/off Logitech z906
+############################################################
+logitech_z906_turn_on_off:
+  alias: Send IR command for turning on/off Logitech z906
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - 'JgBIAAABKJIUERQ1FBEUERQRFBEUERMRFBEUERQRFBEUERM2FBEUNRQRFBEUERQRExEUERQRFDUUNhQ1FDUUNhQ1FDYTNhQREwANBQ=='
+
+############################################################
+# Send IR command for making volume up Logitech z906
+############################################################
+logitech_z906_volume_up:
+  alias: Send IR command for making volume up Logitech z906
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - 'JgBQAAABLI8YDhM3Fg4UERcOFBEWEBUOFBEYDhYPFw4WDxM2Fg8UNhQQEzcVEBU0FRAWNBITFTUVNBUPFzMXDxYzFw4XNBUPEwAF5AABLEUYAA0FAAAAAAAAAAA'
+
+############################################################
+# Send IR command for making volume down Logitech z906
+############################################################
+logitech_z906_volume_down:
+  alias: Send IR command for making volume down Logitech z906
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - 'JgBQAAABKZISExU0ExMVEBMQFhAVEBITFRAVEBUQFRARFBU0FBEVNhQQFDYVEBQ1FRATNhU1FRAVNRQQEjgVDxM4EhMUEBQ2FAAF5AABKEkTAA0FAAAAAAAAAAA'
+
+############################################################
+# Send IR command for changing lavel Logitech z906
+############################################################
+logitech_z906_change_level:
+  alias: Send IR command for changing lavel Logitech z906
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - 'JgCAAAABKpIVEBI3FRAWEBQQFBASFBQRERQUERQQERQUERQ2FRAVNRMRFTUWEBQ0FhAVEBEUFBAUNxQQEjgVEBE4FTUVNRQ1EQAF5wABKkcVAAxfAAEpSBUADF8AASpHFQAMXwABKUgVAAxeAAEqSBUADF4AAStHFAAMXwABK0cUAA0FAAAAAAAAAAA'
+
+############################################################
+# Send IR command for changing output type [2.1, 4.1, 5.1] Logitech z906
+############################################################
+logitech_z906_change_output_sound:
+  alias: Send IR command for changing output type [2.1, 4.1, 5.1] Logitech z906
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - 'JgCQAAABKpEWEBU0FRAVEBYQFBAUERUQFRAVEBUQFBAWEBQ2FBAVNRUQEzYVNRU0FBEVEBITFRAVNRUQEhMVEBQ1FTQWNBQ2FAAF5AABKkcVAAxeAAErRxUADF4AAStGFgAMXgABKkcWAAxeAAErRxIADGEAAStHEQAMYQABLEcVAAxdAAEsRhUADF4AASlJEwANBQAAAAAAAAAA'
+
+############################################################
+# Send IR command for mute Logitech z906
+############################################################
+logitech_z906_mute:
+  alias: Send IR command for mute Logitech z906
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - 'JgBoAAABKJQVDxM4FRAUEBQREhQUEBQRFREUEBQRFBEUERI3EhQUNRMSFTYTEBU2FRAUNRU0FTURORQQEjgSExQ1ExMUERQPEgAF5wABKEoSAAxhAAEoShIADGEAASpIFAAMXwABKkgUAA0F'
+
+############################################################
 # Send IR command for selecting next input source
 ############################################################
 logitech_z906_select_source:
-    alias: Send IR command for selecting next input source
-    sequence:
-      - service: broadlink.send
-        data:
-          host: !secret broadlink_kitchen_host
-          packet:
-            - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
+  alias: Send IR command for selecting next input source
+  sequence:
+    - service: broadlink.send
+      data:
+        host: !secret broadlink_kitchen_host
+        packet:
+          - "JgBQAAABK48ZDBczGA0XDhMSFg8WDhgOFw4UEBcOFw4XDhcyGA4WMxcOFw4VERYzFw4WDxcOFw4TNhcyGDIYDhYzFzIYMxM1GAAF4AABKUkVAA0FAAAAAAAAAAA"
 
 ############################################################
 # Send IR command for selecting next input source 2 times.
