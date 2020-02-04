@@ -8,12 +8,6 @@
         - "time"  #Это время
         - "date"  # Это ставим если нужен отдельно сенсор даты
         - "date_time"
-        
-  - platform: plex_recently_added
-    token: 'ezVSqcaGsCDwiysZqdqV'
-    host: 192.168.1.228
-    port: 32400
-        
 
   - platform: darksky
     api_key: !secret darksky_api_key
