@@ -1,6 +1,5 @@
 host: !secret kitchen_tv_host
 name: Kitchen LG TV
-standby_connection: true
 customize:
   sources:
     - plex
