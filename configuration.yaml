@@ -19,11 +19,11 @@ recorder:
   purge_keep_days: 3
   
       
-input_datetime:
-  cats_cleaning_date:
-    name: Дата очистки туалета котов
-    has_date: true
-    has_time: false
+# input_datetime:
+#   cats_cleaning_date:
+#     name: Дата очистки туалета котов
+#     has_date: true
+#     has_time: false
 
 weather:
   - platform: darksky
