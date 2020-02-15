@@ -1,5 +1,4 @@
 homeassistant: !include homeassistant.yaml
-default_config:
 
 automation: !include automations.yaml
 script: !include scripts.yaml
