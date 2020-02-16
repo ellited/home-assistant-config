@@ -24,10 +24,7 @@ recorder:
 #     has_date: true
 #     has_time: false
 
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    mode: daily
+weather: !include weather.yaml
     
 alexa_media:
   accounts:
