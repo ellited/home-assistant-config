@@ -13,6 +13,7 @@ media_player: !include media_players.yaml
 http: !include http.yaml
 webostv: !include webostv.yaml
 homekit:
+system_health:
 
 recorder:
   purge_keep_days: 3
